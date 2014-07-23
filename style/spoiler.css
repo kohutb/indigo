@@ -1,0 +1,105 @@
+@import url(http://fonts.googleapis.com/css?family=Arimo|Fjalla+One);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 10%;
+  font: 24px/1.5 'Arimo', sans-serif;
+  color: #55657a;
+  background-color: #000;
+}
+
+p {
+  text-align: justify;
+}
+
+.spoiler {
+  position: relative;
+  color: transparent;
+  text-shadow: 0 0 20px #55657a;
+  cursor: help;
+}
+
+.spoiler::before, .spoiler::after {
+  display: block;
+  position: absolute;
+  line-height: 1;
+  font-family: 'Fjalla One', sans-serif;
+  color: #872e27;
+  text-align: center;
+  text-shadow: none;
+}
+
+.spoiler::before {
+  top: 36px;
+  left: 0;
+  right: 0;
+  font-size: 72px;
+  content: 'SPOILER ALERT';
+}
+
+.spoiler::after {
+  opacity: 0;
+  top: 84px;
+  left: calc(50% - 36px);
+  width: 60px;
+  font-size: 60px;
+  line-height: 72px;
+  text-align: center;
+  clip: rect(0, 72px, 72px, 0);
+  content: '3 2 1';  
+}
+
+.spoiler:hover {
+  color: #55657a;
+  text-shadow: 0 0 0 transparent;
+  transition: all 1s;
+  transition-delay: 4s;
+}
+
+.spoiler:hover::before {
+  animation: countdown-before 5s forwards;
+}
+
+.spoiler:hover::after {
+  animation: countdown-after 5s forwards;
+}
+
+@keyframes countdown-before {
+  25% {
+    transform: translateY(-24px);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+  	opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes countdown-after {
+  25% {
+    opacity: 1;
+    clip: rect(0, 72px, 72px, 0);
+    transform: translateY(0);
+    animation-timing-function: steps(1, start);
+  }
+  50% {
+    clip: rect(72px, 72px, 144px, 0);
+    transform: translateY(-72px);
+    animation-timing-function: steps(1, start);
+  }
+  75% {
+    opacity: 1;
+    clip: rect(144px, 72px, 216px, 0);
+    transform: translateY(-144px);
+  }
+  100% {
+    opacity: 0;
+    clip: rect(144px, 72px, 216px, 0);
+    transform: translateY(-144px);
+  }
+}
